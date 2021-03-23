@@ -28,3 +28,7 @@ different tyoes overlap.
 ## NAICS Codes
 
 It appears that the  NAICS codes used in the Master Business List are vintage 2007. The code '72221' appears frequently, which is valid in 2007 NAICS, but not in 2012 or 2016 NAICS. 
+
+## Geocoding
+
+The geocoding was performed with a local installation of Pelias. There are some notable errors in the geocoding. For instance, Ba Ho Liquor and Deli, with address of '4031 AVATI DR SUITE I SAN DIEGO 92117-4403, CA', was geocoded to 4144 Avati, moving the location from a neighborhood mini-mall to a residence. It is unknown how many such error there are, so use the geocodes with caution. 
