@@ -2,27 +2,27 @@ Declare,metatab-latest
 Title,San Diego Business Clusters
 Description,Business in San Diego linked to entertainment clusters and population density.
 Identifier,fccbdf8d-ee43-4d24-8436-30fba94d26ca
-Name,sandiegodata.org-business_clusters-1.2.1
+Name,sandiegodata.org-business_clusters-1.3.3
 Dataset,business_clusters
 Origin,sandiegodata.org
 Time,
 Space,
 Grain,
 Variant,
-Version,1.2.1
+Version,1.3.3
 Version.Major,1
-Version.Minor,2
-Version.Patch,1
+Version.Minor,3
+Version.Patch,3
 Created,2021-03-19T18:07:30
-Modified,2021-03-22T17:31:18
+Modified,2021-03-26T16:01:10
 Giturl,https://github.com/CivicKnowledge/radius-search.git
-""
+
 Section,Contacts,Email,Organization,Url
 Wrangler,Eric Busboom,eric@civicknowledge.com,Civic Knowledge,http://civicknowledge.com
-""
+
 Section,Documentation,Title,Description,
 Documentation,file:README.md,README,,
-""
+
 Section,References,Name,Description,
 Reference,index:civicknowledge.com-osm-demosearch-2.1.1#business_clusters,business_clusters,US business clusters,
 Reference,https://www.sandiego.gov/sites/default/files/tr_active1.csv,sd_businesses_ak,San Diego Businesses A-K,
@@ -33,15 +33,22 @@ Reference,https://www.census.gov/naics/2007NAICS/2007_NAICS_Index_File.xls,naics
 Reference,https://www.census.gov/naics/2017NAICS/2-6%20digit_2017_Codes.xlsx,naics_index_2007_26,"NAICS index file, 2007, 2 to 6 digit codes",
 Reference,censusgeo://2019/5/CA/blockgroup,census_bg,CA Census Blocks,
 Reference,census://2018/5/CA/blockgroup/B01003,total_population,Total population by blocks (2018 b/c download errors in 2019(,
-""
+Reference,shape+file:data/Business_Enterprise_Zones_SD.ZIP,bez,Business district from SANGIS,
+Reference,shape+file:data/Business_Improvement_Districts_SD.ZIP,bid,Business district from SANGIS,
+Reference,shape+file:data/Business_Regional_Enterprise_Zones_SD.zip,brez,Business district from SANGIS,
+Reference,shape+file:data/Business_Targeted_Employment_Areas_SD.ZIP,btea,Business district from SANGIS,
+Reference,shape+file:data/Promise_Zone_SD.zip,promise,Business district from SANGIS,
+Reference,shape+file:data/Property_Based_Improvement_Districts_SD.ZIP,pbid,Business district from SANGIS,
+
 Section,Resources,Name,Description,
 Datafile,notebooks/Extract.ipynb#sb_mbl,sb_mbl,"Businesses registered in San DIego, from the Master BusinessList",
 Datafile,notebooks/Extract.ipynb#sd_business_clusters,sd_business_clusters,Geographic boundaries of business clusters,
 Datafile,notebooks/Extract.ipynb#sd_businesses,sd_businesses,"San Diego Businesses, geocoded",
-Datafile,notebooks/Extract.ipynb#sd_custered_businesses,sd_custered_businesses,"San Diego Businesses, geocodes and linked to clusters.",
+Datafile,notebooks/Extract.ipynb#sd_custered_businesses,sd_clustered_businesses,"San Diego Businesses, geocodes and linked to clusters. Businesses in multiple clusters are duplicated",
 Datafile,notebooks/Extract.ipynb#naics,naics,Naics codes for San Diego businesses,
 Datafile,notebooks/Extract.ipynb#blocks,blockgroups,Geo data for census block groups and total population,
-""
+Datafile,notebooks/Extract.ipynb#bid,bid,San Diego Business Improvement Districts,
+
 Section,Schema,DataType,AltName,Description,Has_Codes
 Table,sb_mbl,,,,
 Table.Column,BUSINESS ACCT#,integer,business_acct,,
@@ -60,7 +67,6 @@ Table.Column,NAICS,integer,naics,2007 NAICS code,
 Table.Column,ACTIVITY DESC,string,activity_desc,,
 Table,sd_business_clusters,,,,
 Table.Column,cluster_n,integer,,Cluster number,
-Table.Column,cluster_type,string,,"Cluster type: ent, shop, or casual",
 Table.Column,geometry,string,,,
 Table,sd_businesses,,,,
 Table.Column,account,integer,,,
@@ -79,7 +85,7 @@ Table.Column,geometry,string,,"Geocoded position, in WKT format",
 Table.Column,geoid,string,,Geoid of the Census block group that contain the business point.,
 Table.Column,pop,integer,,"Population of the bock group, from 2019 5 year ACS",
 Table.Column,area,integer,,Area of the block group in square meters.,
-Table,sd_custered_businesses,,,,
+Table,sd_clustered_businesses,,,,
 Table.Column,account,integer,,,
 Table.Column,gc_address,string,,,
 Table.Column,lat,number,,,
@@ -96,7 +102,8 @@ Table.Column,OWNER NAME,string,owner_name,,
 Table.Column,NAICS,integer,naics,,
 Table.Column,ACTIVITY DESC,string,activity_desc,,
 Table.Column,cluster_n,integer,,Cluster number,
-Table.Column,cluster_type,string,,"Cluster type: ent, shop, or casual",
+Table.Column,bid_name,string,,,
+Table.Column,bid_code,integer,,,
 Table.Column,geometry,string,,"Point location of the business, in WKT format",
 Table,naics,,,,
 Table.Column,account,integer,,Business account number,
@@ -119,3 +126,28 @@ Table.Column,pop,integer,,,
 Table.Column,intptlat,number,,,
 Table.Column,intptlon,number,,,
 Table.Column,geometry,string,,,
+Table,bid,,,,
+Table.Column,bid_name,string,,,
+Table.Column,bid_code,integer,,,
+Table.Column,geometry,string,,,
+Table,sd_uclustered_businesses,,,,
+Table.Column,account,integer,,,
+Table.Column,gc_address,string,,,
+Table.Column,lat,number,,,
+Table.Column,lon,number,,,
+Table.Column,geoid,string,,,
+Table.Column,pop,integer,,,
+Table.Column,area,integer,,,
+Table.Column,DBA NAME,string,dba_name,,
+Table.Column,OWNERSHIP TYPE,string,ownership_type,,
+Table.Column,CREATION DT,date,creation_dt,,
+Table.Column,START DT,date,start_dt,,
+Table.Column,EXP DT,date,exp_dt,,
+Table.Column,OWNER NAME,string,owner_name,,
+Table.Column,NAICS,integer,naics,,
+Table.Column,ACTIVITY DESC,string,activity_desc,,
+Table.Column,cluster_n,integer,,,
+Table.Column,bid_name,string,,,
+Table.Column,bid_code,integer,,,
+Table.Column,geometry,string,,,
+Table.Column,sort_order,integer,,,

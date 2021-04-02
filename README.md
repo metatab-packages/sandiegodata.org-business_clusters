@@ -23,7 +23,7 @@ collecting nearby businesses from Open Street Map data. The cluster types are:
 The ``sd_business_clusters`` file has the clusters and their WKT geographies.
 The ``sd_custered_businesses`` links San Diego businesses to clusters, and a
 single business may be in more than one cluster because the clusters of
-different tyoes overlap.
+different types overlap. The `sd_ucustered_businesses` has the businesses deduplicated, with a business that is in multiple clusters taking only one cluster, in this order, from highest to lowest preference: 'ent', 'shop', 'casual','NA'
 
 ## NAICS Codes
 
